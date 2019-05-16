@@ -1,4 +1,7 @@
 #pragma once
+
+#include "IVehicle.h"
+
 class IAircraft : public IVehicle
 {
 public:
