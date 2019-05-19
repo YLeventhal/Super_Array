@@ -157,6 +157,8 @@
     <ClInclude Include="IVehicle.h" />
     <ClInclude Include="IWatercraft.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SuperArray.h" />
+    <ClInclude Include="TNode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CAirplane.cpp" />
@@ -171,6 +173,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SArray.cpp" />
+    <ClCompile Include="SuperArray.cpp" />
+    <ClCompile Include="TNode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

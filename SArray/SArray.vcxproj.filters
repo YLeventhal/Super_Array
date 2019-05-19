@@ -33,6 +33,12 @@
     <ClInclude Include="CHotAirBalloon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SuperArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -54,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CHotAirBalloon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SuperArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
