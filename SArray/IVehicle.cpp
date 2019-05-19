@@ -2,11 +2,3 @@
 #include "IVehicle.h"
 
 
-IVehicle::IVehicle()
-{
-}
-
-
-IVehicle::~IVehicle()
-{
-}

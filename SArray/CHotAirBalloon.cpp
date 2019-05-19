@@ -17,7 +17,7 @@ CHotAirBalloon::~CHotAirBalloon()
 
 void CHotAirBalloon::Print()
 {
-	std::cout << "Class: CHotAirBalloon\n Shape: " << m_sShape << "\n" << "Name: " << m_sColour << std::endl;
+	std::cout << "Class: CHotAirBalloon\nShape: " << m_sShape << "\n" << "Name: " << m_sColour << std::endl;
 }
 
 void  CHotAirBalloon::TurnOn()

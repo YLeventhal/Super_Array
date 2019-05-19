@@ -1,9 +1,10 @@
 #pragma once
+
 class IVehicle
 {
 public:
-	IVehicle();
-	virtual ~IVehicle();
+	IVehicle() {};
+	virtual ~IVehicle() {};
 
 	virtual void Print() = 0;
 	virtual void SteerLeft() = 0;
