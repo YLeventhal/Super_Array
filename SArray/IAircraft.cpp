@@ -3,11 +3,3 @@
 #include "IAircraft.h"
 
 
-IAircraft::IAircraft()
-{
-}
-
-
-IAircraft::~IAircraft()
-{
-}

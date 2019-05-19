@@ -17,7 +17,7 @@ CAirplane::~CAirplane()
 
 void CAirplane::Print()
 {
-	std::cout << "Class: CAirplane\n Brand: " << m_sBrand << "\n" << "Model: " << m_sModel << std::endl;
+	std::cout << "Class: CAirplane\nBrand: " << m_sBrand << "\n" << "Model: " << m_sModel << std::endl;
 }
 
 void  CAirplane::TurnOn()
