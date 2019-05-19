@@ -6,17 +6,34 @@ class TNode
 private:
 	int m_nIndex;
 	T m_tData;
+	int m_nLowestPreviousIndex;
+	int m_nHighestPreviousIndex;
 	TNode<T>* m_pNext = nullptr;
 public:
 	TNode() {}
-	TNode(int index) { m_nIndex = index; }
+	TNode(int index, int hpi, int lpi) 
+	{
+		m_nIndex = index;
+		m_nHighestPreviousIndex = hpi;
+		m_nLowestPreviousIndex = lpi;
+	}
 	~TNode() {};
 
-	TNode<T>& operator=(T data);
+	TNode(const TNode<T>& other)
+	{
+		std::cout << "called TNodes copy constructor op\n";
+
+		this->m_nIndex = other.GetIndex();
+		this->m_tData = other.GetData();
+	}
+
+	TNode<T>& operator=(const T& data);
 	TNode<T>& operator=(const TNode<T>& node);
 
 	int GetIndex() { return m_nIndex; }
-	T& GetData() { return m_tData; }
+	int GetHighestPreIndex() { return m_nHighestPreviousIndex; }
+	int GetLowestPreIndex() { return m_nLowestPreviousIndex; }
+	const T& GetData()const { return m_tData; }
 	TNode<T>*& GetNext() { return m_pNext; }
 
 	//void SetIndex(int index) { m_nIndex = index; }
@@ -25,8 +42,10 @@ public:
 };
 
 template<class T>
-TNode<T>& TNode<T>::operator=(T data)
+TNode<T>& TNode<T>::operator=(const T& data)
 {
+	std::cout << "called TNodes=(int) op\n";
+
 		this->m_tData = data;
 		return *this;
 }
@@ -34,7 +53,9 @@ TNode<T>& TNode<T>::operator=(T data)
 template<class T>
 TNode<T>& TNode<T>::operator=(const TNode<T>& node)
 {
+	std::cout << "called TNodes=(TNode) op\n";
+
 	this->m_tData = node.GetData();
-	return this;
+	return *this;
 }
 
