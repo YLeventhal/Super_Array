@@ -1,4 +1,6 @@
 #pragma once
+#include "TNode.h"
+
 
 template<class T>
 class SuperArray
@@ -6,8 +8,8 @@ class SuperArray
 private:
 	TNode<T>* m_pHead = nullptr;
 	int m_nNumOfElements = 0;
-	int m_nLowestIndex = 0;
-	int m_nHighestIndex = 0;
+	int m_nLowestIndex = 10000000;
+	int m_nHighestIndex = -10000000;
 
 public:
 	SuperArray() {};
@@ -19,6 +21,7 @@ public:
 	const int num_elements()const;
 	const int lowest_index()const;
 	const int highest_index()const;
+	TNode<T>* GetHead() { return m_pHead; }
 };
 
 template<class T>
@@ -36,8 +39,6 @@ TNode<T>& SuperArray<T>::operator[](int index)
 	{
 		m_pHead = new TNode<T>(index);
 		m_nNumOfElements++;
-		m_nLowestIndex = index;
-		m_nHighestIndex = index;
 		return *m_pHead;
 	}
 	// check if the given index already exists. If yes, return that node and the overloaded node operator= will overwrite the data
@@ -45,7 +46,7 @@ TNode<T>& SuperArray<T>::operator[](int index)
 	else 
 	{
 		temp = m_pHead;
-		while (temp != nullptr)
+		while (temp->GetNext() != nullptr)
 		{
 			if (temp->GetIndex() == index)
 			{
@@ -53,11 +54,18 @@ TNode<T>& SuperArray<T>::operator[](int index)
 			}
 			
 			temp = temp->GetNext();
-			
 		}
-		temp = new TNode<T>(index);
-		m_nNumOfElements++;
-		return *temp;
+
+		if (temp->GetIndex() == index)
+		{
+			return *temp;
+		}
+		else
+		{
+			(temp->GetNext()) = new TNode<T>(index);
+			m_nNumOfElements++;
+			return *temp->GetNext();
+		}
 	}
 }
 

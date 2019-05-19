@@ -11,15 +11,22 @@ int main()
 {
 	SuperArray<int> arr1, arr2; // new arrays of integers
 
-	arr1[10] = 20;
+	arr1[10];// = 20;
 	arr1[100] = 34;
-	/*arr1[-12] = arr1[2]; // will use the constructor with no arguments to
+	std::cout << arr1.GetHead()->GetIndex() << std::endl;
+	std::cout << arr1.GetHead()->GetData() << std::endl;
+	std::cout << arr1.GetHead()->GetNext()->GetIndex() << std::endl;
+	std::cout << arr1.GetHead()->GetNext()->GetData() << std::endl;
+
+
+
+	//arr1[-12] = arr1[2]; // will use the constructor with no arguments to
 	// create the item at arr1[2] that did not exist prior
 	// to this line. Both items will now contain unknown
 	// garbage!
 	arr1[100] = 48; // Replaces the value in index 100 to be 48
 	// arr1 contains items at -12,2,10,100
-	arr1.remove(-12); // remove the item at index -12
+	/*arr1.remove(-12); // remove the item at index -12
 	arr1.remove(7); // do nothing (nothing at 7)
 	// arr1 contains items at 2,10,100
 	arr2 = arr1; // copy entire array

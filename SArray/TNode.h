@@ -13,10 +13,11 @@ public:
 	~TNode() {};
 
 	TNode<T>& operator=(T data);
+	TNode<T>& operator=(const TNode<T>& node);
 
 	int GetIndex() { return m_nIndex; }
 	T& GetData() { return m_tData; }
-	TNode<T>* GetNext() { return m_pNext; }
+	TNode<T>*& GetNext() { return m_pNext; }
 
 	//void SetIndex(int index) { m_nIndex = index; }
 	void SetData(T pData) { m_tData = pData; };
@@ -28,5 +29,12 @@ TNode<T>& TNode<T>::operator=(T data)
 {
 		this->m_tData = data;
 		return *this;
+}
+
+template<class T>
+TNode<T>& TNode<T>::operator=(const TNode<T>& node)
+{
+	this->m_tData = node.GetData();
+	return this;
 }
 
