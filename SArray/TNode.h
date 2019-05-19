@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+using namespace std;
 
 template<class T>
 class TNode
@@ -27,13 +29,23 @@ public:
 	TNode<T>& operator=(const TNode<T>& node);
 
 	int GetIndex() { return m_nIndex; }
-	const T& GetData()const { return m_tData; }
+	T& GetData()const { return (const_cast<TNode*>(this))->m_tData; }
 	TNode<T>*& GetNext() { return m_pNext; }
 
 	//void SetIndex(int index) { m_nIndex = index; }
 	void SetData(T pData) { m_tData = pData; };
 	void SetNext(TNode<T>* pPtr) { m_pNext = pPtr; }
+	friend ostream& operator<<(ostream& s, const TNode<T>& node);
 };
+
+
+template<class T>
+ostream& operator<<(ostream& s, const TNode<T>& node)
+{
+	s << "Index: " << node.m_nIndex << endl;
+	//s << "Element: " << node.m_tData << endl;
+}
+
 
 template<class T>
 TNode<T>& TNode<T>::operator=(const T& data)

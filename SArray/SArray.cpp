@@ -14,6 +14,9 @@ using std::endl;
 template<class T>
 void printList(TNode<T>* head);
 
+void Print(int& obj);
+
+
 int main()
 {
 
@@ -110,6 +113,10 @@ int main()
 		int n = arr2.num_elements(); // n will be 3
 		n = arr2.lowest_index(); // n will be -12
 		n = arr2.highest_index(); // n will be 100
+		void(*ptr)(int&) = Print;
+
+		arr2.PntrToFunc(ptr);
+
 		return 0;
 }
 
@@ -127,3 +134,9 @@ void printList(TNode<T>* head)
 		t = t->GetNext();
 	}
 }
+
+void Print(int& obj)
+{
+	cout << obj << endl;
+}
+

@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "TNode.h"
 
 
@@ -29,8 +30,10 @@ public:
 	void remove();
 	void AdjIndexRecord(int index);
 	bool Empty();
-	void PntrToFunc(void(*ptrfunc)(T& obj));
+	void PntrToFunc(void(*ptrfunc)(T&));
 };
+
+
 
 template<class T>
 void SuperArray<T>::AdjIndexRecord(int index)
@@ -159,7 +162,7 @@ void SuperArray<T>::remove()
 
 // Receives a function pointer, that itself receives an object from the array list, and calls the functioin on each object
 template<class T>
-void SuperArray<T>::PntrToFunc(void(*ptrfunc)(T& obj))
+void SuperArray<T>::PntrToFunc(void(*ptrfunc)(T&))
 {
 	TNode<T>* temp = m_pHead;
 
