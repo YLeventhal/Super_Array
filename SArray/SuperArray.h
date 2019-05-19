@@ -27,8 +27,61 @@ public:
 	const int highest_index()const;
 	void remove(int index);
 	void remove();
+	void AdjIndexRecord(int index);
+	bool Empty();
 	void PntrToFunc(void(*ptrfunc)(T& obj));
 };
+
+template<class T>
+void SuperArray<T>::AdjIndexRecord(int index)
+{
+	int newHighestIndex = -10000000;
+	int newLowestIndex = 10000000;
+
+	TNode<T>* temp;
+
+	// Deleted the node with the highest index
+	if (this->m_nHighestIndex == index)
+	{
+		temp = m_pHead;
+		while (temp->GetNext() != nullptr)
+		{
+			if (temp->GetIndex() > newHighestIndex)
+			{
+				newHighestIndex = temp->GetIndex();
+			}
+			temp = temp->GetNext();
+		}
+		if (temp->GetIndex() > newHighestIndex)
+		{
+			newHighestIndex = temp->GetIndex();
+		}
+		this->m_nHighestIndex = newHighestIndex;
+	}
+	if (this->m_nLowestIndex == index)
+	{
+		temp = m_pHead;
+		while (temp->GetNext() != nullptr)
+		{
+			if (temp->GetIndex() < newLowestIndex)
+			{
+				newLowestIndex = temp->GetIndex();
+			}
+			temp = temp->GetNext();
+		}
+		if (temp->GetIndex() < newLowestIndex)
+		{
+			newLowestIndex = temp->GetIndex();
+		}
+		this->m_nLowestIndex = newLowestIndex;
+	}
+}
+
+template<class T>
+bool SuperArray<T>::Empty()
+{
+	return  (m_pHead == nullptr) ? true : false;
+}
 
 template<class T>
 void SuperArray<T>::remove(int index)
@@ -36,37 +89,53 @@ void SuperArray<T>::remove(int index)
 	TNode<T>* current;
 	TNode<T>* previous;
 	TNode<T>* toDelete;
-
-
-	// If the index is the first in the list, store its address in toDelete, point head to next node and delete the node
-	if (m_pHead->GetIndex() == index)
+	
+	bool deleted = false;
+	
+	// If the array is not empty...
+	if (!Empty())
 	{
-		if (this->m_nHighestIndex == index)
+		// If the index is the first in the list, store its address in toDelete, point head to next node and delete the node
+		if (m_pHead->GetIndex() == index)
 		{
-			m_nHighestIndex = m_pHead->GetHighestPreIndex();
-		}
-		toDelete = m_pHead;
-		m_pHead = m_pHead->GetNext();
-		delete toDelete;
-		m_nNumOfElements--;
-	}
-
-	current = m_pHead->GetNext();
-	previous = m_pHead;
-	// The index is not the first, therfor search the list to see if it exists
-	while (current != nullptr)
-	{
-		// If it exists, store its address in toDelete, point previous to next node and delete the current node
-		if (current->GetIndex() == index)
-		{
-			toDelete = current;
-			previous->GetNext() = current->GetNext();
+			toDelete = m_pHead;
+			this->m_pHead = m_pHead->GetNext();
 			delete toDelete;
-			return;
+			deleted = true;
 		}
-		// Moving pointers over to next node
-		previous = current;
-		current = current->GetNext();
+		else// The index is not the first, therfor search the list to see if it exists
+
+		{
+			current = m_pHead->GetNext();
+			previous = m_pHead;
+			while (current != nullptr)
+			{
+				// If it exists, store its address in toDelete, point previous to next node and delete the current node
+				if (current->GetIndex() == index)
+				{
+					toDelete = current;
+					previous->GetNext() = current->GetNext();
+					delete toDelete;
+					deleted = true;
+					break;
+				}
+				// Moving pointers over to next node
+				previous = current;
+				current = current->GetNext();
+			}
+		}
+		// If deleted only node
+		if (Empty())
+		{
+			m_nNumOfElements = 0;
+			m_nHighestIndex = -10000000;
+			m_nLowestIndex = 10000000;
+		}
+		else if (deleted)// deleted something and there are still more nodes in the array
+		{
+			m_nNumOfElements--;
+			this->AdjIndexRecord(index);
+		}
 	}
 }
 
@@ -117,7 +186,7 @@ TNode<T>& SuperArray<T>::operator[](const int index)
 	// No nodes in the list therefor add new node at head
 	if (m_pHead == nullptr)
 	{
-		m_pHead = new TNode<T>(index, currentHighestIndex, lowestCurrentIndex);
+		m_pHead = new TNode<T>(index);
 		m_nNumOfElements++;
 		return *m_pHead;
 	}

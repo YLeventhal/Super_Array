@@ -6,16 +6,12 @@ class TNode
 private:
 	int m_nIndex;
 	T m_tData;
-	int m_nLowestPreviousIndex;
-	int m_nHighestPreviousIndex;
 	TNode<T>* m_pNext = nullptr;
 public:
 	TNode() {}
-	TNode(int index, int hpi, int lpi) 
+	TNode(int index) 
 	{
 		m_nIndex = index;
-		m_nHighestPreviousIndex = hpi;
-		m_nLowestPreviousIndex = lpi;
 	}
 	~TNode() {};
 
@@ -31,8 +27,6 @@ public:
 	TNode<T>& operator=(const TNode<T>& node);
 
 	int GetIndex() { return m_nIndex; }
-	int GetHighestPreIndex() { return m_nHighestPreviousIndex; }
-	int GetLowestPreIndex() { return m_nLowestPreviousIndex; }
 	const T& GetData()const { return m_tData; }
 	TNode<T>*& GetNext() { return m_pNext; }
 
