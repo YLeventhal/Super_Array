@@ -23,9 +23,13 @@ public:
 	int operator = (int);
 	SuperArray<T>& operator=(const SuperArray<T>&);
 
-	const int num_elements()const;
-	const int lowest_index()const;
-	const int highest_index()const;
+	//to use const here for the returned value is meaningless b/c.. what is returned is just a copy of the value. 
+	// the necessary usage of this kind of const is when you return a reference and dont want the actual value of the member it is 
+	// referencing changed
+	/*const*/ int num_elements()const;
+	 int lowest_index()const;
+	 int highest_index()const;
+
 	void remove(int index);
 	void remove();
 	void AdjIndexRecord(int index);

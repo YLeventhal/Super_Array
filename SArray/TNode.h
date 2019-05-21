@@ -30,7 +30,7 @@ public:
 
 	int GetIndex() { return m_nIndex; }
 	T& GetData()const { return /*(const_cast<TNode*>(this))->*/m_tData; }
-	TNode<T>*& GetNext() { return m_pNext; }
+	TNode<T>* GetNext() { return m_pNext; }
 
 	//void SetIndex(int index) { m_nIndex = index; }
 	void SetData(T pData) { m_tData = pData; };

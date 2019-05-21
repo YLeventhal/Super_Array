@@ -39,6 +39,9 @@
     <ClInclude Include="TNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IEngineVehicle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

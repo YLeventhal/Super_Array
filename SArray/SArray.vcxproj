@@ -154,6 +154,7 @@
     <ClInclude Include="CAirplane.h" />
     <ClInclude Include="CHotAirBalloon.h" />
     <ClInclude Include="IAircraft.h" />
+    <ClInclude Include="IEngineVehicle.h" />
     <ClInclude Include="IVehicle.h" />
     <ClInclude Include="IWatercraft.h" />
     <ClInclude Include="pch.h" />
