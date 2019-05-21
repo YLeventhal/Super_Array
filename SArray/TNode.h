@@ -7,7 +7,7 @@ class TNode
 {
 private:
 	int m_nIndex;
-	T m_tData;
+	mutable T m_tData;
 	TNode<T>* m_pNext = nullptr;
 public:
 	TNode() {}
@@ -29,7 +29,7 @@ public:
 	TNode<T>& operator=(const TNode<T>& node);
 
 	int GetIndex() { return m_nIndex; }
-	T& GetData()const { return (const_cast<TNode*>(this))->m_tData; }
+	T& GetData()const { return /*(const_cast<TNode*>(this))->*/m_tData; }
 	TNode<T>*& GetNext() { return m_pNext; }
 
 	//void SetIndex(int index) { m_nIndex = index; }

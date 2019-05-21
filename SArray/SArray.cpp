@@ -35,6 +35,7 @@ int main()
 		arr1.remove(7); // do nothing (nothing at 7)
 		// arr1 contains items at 2,10,100
 		arr2 = arr1; // copy entire array
+		//printList(arr1.GetHead());
 		arr1.remove(); // deletes the entire arr1 array
 		arr2[-12] = 7;
 		arr2.remove(2); // remove item at index 2
@@ -71,7 +72,7 @@ int main()
 		vehicleArray[-4] = hab4;
 		vehicleArray[-16] = ap5;
 		vehicleArray[-1] = hab5;
-
+		//printList(vehicleArray.GetHead());
 		vehicleArray.PntrToFunc(PolyPrint);
 
 		return 0;
