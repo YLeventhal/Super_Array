@@ -1,5 +1,6 @@
 
 #include "pch.h"
+#include <typeinfo>
 #include <iostream>
 #include "IVehicle.h"
 #include "IWatercraft.h"
@@ -20,11 +21,15 @@ void Print(int& obj);
 int main()
 {
 
+	IVehicle* iv = new CAirplane("boeing", "747");
+	//iv->TakeOff();  won't compile because the base does not have method with this signature. only the virtual functions can be called using poly. If want to call derived, need to cast it to derived pointer
+	dynamic_cast<CAirplane*>(iv)->TakeOff();
 	/*CHotAirBalloon hab1("car", "red");
 	hab1.Print();
 	CAirplane ap1("boeing", "747");
 	ap1.Print();*/
-
+	TNode<int> z;
+	cout << typeid(z).name()<<endl;
 	
 		SuperArray<int> arr1, arr2; // new arrays of integers
 		/*arr1[10] = 20;
@@ -115,6 +120,8 @@ int main()
 		n = arr2.highest_index(); // n will be 100
 		void(*ptr)(int&) = Print;
 
+		arr2.PntrToFunc(ptr);
+		arr2.remove();
 		arr2.PntrToFunc(ptr);
 
 		return 0;

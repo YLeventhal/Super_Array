@@ -19,7 +19,7 @@ public:
 
 	TNode(const TNode<T>& other)
 	{
-		std::cout << "called TNodes copy constructor op\n";
+		//std::cout << "called TNodes copy constructor op\n";
 
 		this->m_nIndex = other.GetIndex();
 		this->m_tData = other.GetData();
@@ -30,7 +30,7 @@ public:
 
 	int GetIndex() { return m_nIndex; }
 	T& GetData()const { return (const_cast<TNode*>(this))->m_tData; }
-	TNode<T>*& GetNext() { return m_pNext; }
+	TNode<T>* GetNext() { return m_pNext; }
 
 	//void SetIndex(int index) { m_nIndex = index; }
 	void SetData(T pData) { m_tData = pData; };
@@ -50,7 +50,7 @@ ostream& operator<<(ostream& s, const TNode<T>& node)
 template<class T>
 TNode<T>& TNode<T>::operator=(const T& data)
 {
-	std::cout << "called TNodes=(int) op\n";
+	//std::cout << "called TNodes=(int) op\n";
 
 		this->m_tData = data;
 		return *this;
@@ -59,7 +59,7 @@ TNode<T>& TNode<T>::operator=(const T& data)
 template<class T>
 TNode<T>& TNode<T>::operator=(const TNode<T>& node)
 {
-	std::cout << "called TNodes=(TNode) op\n";
+	//std::cout << "called TNodes=(TNode) op\n";
 
 	this->m_tData = node.GetData();
 	return *this;

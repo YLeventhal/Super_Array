@@ -14,13 +14,12 @@ private:
 
 public:
 	SuperArray() {
-		std::cout << "called superarrays def constructor op\n";
+		//std::cout << "called superarrays def constructor op\n";
 	};
 	~SuperArray() {};
 
 	TNode<T>* GetHead()const { return m_pHead; }
 	TNode<T>& operator[](const int index);
-	int operator = (int);
 	SuperArray<T>& operator=(const SuperArray<T>&);
 
 	const int num_elements()const;
@@ -28,6 +27,7 @@ public:
 	const int highest_index()const;
 	void remove(int index);
 	void remove();
+	void DeleteRec(TNode<T>* node);
 	void AdjIndexRecord(int index);
 	bool Empty();
 	void PntrToFunc(void(*ptrfunc)(T&));
@@ -117,7 +117,7 @@ void SuperArray<T>::remove(int index)
 				if (current->GetIndex() == index)
 				{
 					toDelete = current;
-					previous->GetNext() = current->GetNext();
+					previous->SetNext(current->GetNext());
 					delete toDelete;
 					deleted = true;
 					break;
@@ -148,7 +148,7 @@ void SuperArray<T>::remove()
 	// If Array is not empty, delete the list and null the head pointer
 	if (m_pHead != nullptr)
 	{
-		delete m_pHead;
+		DeleteRec(m_pHead);
 		m_pHead = nullptr;
 		m_nNumOfElements = 0;
 		m_nHighestIndex = -10000000;
@@ -165,18 +165,21 @@ template<class T>
 void SuperArray<T>::PntrToFunc(void(*ptrfunc)(T&))
 {
 	TNode<T>* temp = m_pHead;
-
-	while (temp != nullptr)
+	if (temp != nullptr)
 	{
-		ptrfunc(temp->GetData());
-		temp = temp->GetNext();
+		while (temp != nullptr)
+		{
+			ptrfunc(temp->GetData());
+			temp = temp->GetNext();
+		}
 	}
+	else { cout << "empty list"; }
 }
 
 template<class T>
 TNode<T>& SuperArray<T>::operator[](const int index)
 {
-	std::cout << "called superarrays[] op\n";
+	//std::cout << "called superarrays[] op\n";
 	TNode<T>* temp;
 	int currentHighestIndex = m_nHighestIndex;
 	int lowestCurrentIndex = m_nLowestIndex;
@@ -214,52 +217,46 @@ TNode<T>& SuperArray<T>::operator[](const int index)
 		}
 		else
 		{
-			(temp->GetNext()) = new TNode<T>(index);
+			temp->SetNext(new TNode<T>(index)) ;
 			m_nNumOfElements++;
 			return *temp->GetNext();
 		}
 	}
 }
 
-template<class T>
-int SuperArray<T>::operator=(int)
-{
-	std::cout << "called super arrays  =op  (int)\n";
-
-}
 
 
 template<class T>
 SuperArray<T>&  SuperArray<T>::operator=(const SuperArray<T>& other)
 {
-	std::cout << "called super arrays  =op  (superarray)\n";
+	//std::cout << "called super arrays  =op  (superarray)\n";
 	this->m_nNumOfElements = other.num_elements();
 	this->m_nHighestIndex = other.highest_index();
 	this->m_nLowestIndex = other.lowest_index();
 
-	TNode<T>* hostArray = this->m_pHead;
-	TNode<T>* otherArray = other.GetHead();
+	TNode<T>* hostArrayNode = this->m_pHead;
+	TNode<T>* otherArrayNode = other.GetHead();
 	TNode<T>* previous = nullptr;
 
-	while (otherArray != nullptr)
+	while (otherArrayNode != nullptr)
 	{
 		// If we are creating the first node in the list
-		if (hostArray == this->m_pHead)
+		if (hostArrayNode == this->m_pHead)
 		{
-			hostArray = new TNode<T>(otherArray->GetIndex());
-			*hostArray = *otherArray;
-			this->m_pHead = hostArray;
-			previous = hostArray;
-			hostArray = nullptr;
+			hostArrayNode = new TNode<T>(otherArrayNode->GetIndex());
+			*hostArrayNode = *otherArrayNode;
+			this->m_pHead = hostArrayNode;
+			previous = hostArrayNode;
+			hostArrayNode = nullptr;
 		}
 		// Creating the rest of the nodes
 		else
 		{
-			previous->GetNext() = new TNode<T>(otherArray->GetIndex());
+			previous->SetNext(new TNode<T>(otherArrayNode->GetIndex()));
 			previous = previous->GetNext();
-			*previous = *otherArray;
+			*previous = *otherArrayNode;
 		}
-		otherArray = otherArray->GetNext();
+		otherArrayNode = otherArrayNode->GetNext();
 	}
 	return *this;
 }
@@ -283,3 +280,18 @@ const int SuperArray<T>::highest_index()const
 	return m_nHighestIndex;
 }
 
+template<class T>
+void SuperArray<T>::DeleteRec(TNode<T>* node)
+{
+	// Recurse to end of list
+	if (node == nullptr)
+	{
+		return;
+	}
+	else
+	{
+		DeleteRec(node->GetNext());
+	}
+	// Backtrack and delete each node along the way
+	delete node;
+}
