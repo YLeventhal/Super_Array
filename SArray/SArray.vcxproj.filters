@@ -47,15 +47,6 @@
     <ClCompile Include="SArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IVehicle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IAircraft.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IWatercraft.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CAirplane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
