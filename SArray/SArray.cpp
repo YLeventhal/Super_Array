@@ -1,6 +1,7 @@
 
 #include "pch.h"
 #include <iostream>
+#include <typeinfo>
 #include "IVehicle.h"
 #include "IWatercraft.h"
 #include "IAircraft.h"
@@ -80,7 +81,7 @@ int main()
 
 	void PolyPrint(IVehicle* ptr)
 	{
-		typeid(*ptr);
+		cout << "typeid called: " << typeid(*ptr).name() << endl;
 		if (CAirplane* ap = dynamic_cast<CAirplane*>(ptr))
 		{
 			cout << "its an airplane!" << endl;

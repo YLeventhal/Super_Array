@@ -2,8 +2,7 @@
 
 class IVehicle
 {
-public:
-	IVehicle() {};
+public: // Need to have implementation of destructor or the linker has issues
 	virtual ~IVehicle() {};
 
 	virtual void Print() = 0;

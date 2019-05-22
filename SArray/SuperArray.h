@@ -149,7 +149,7 @@ void SuperArray<T>::remove(int index)
 template<class T>
 void SuperArray<T>::remove()
 {
-	// If Array is not empty, delete the list and null the head pointer
+	// If Array is not empty, delete the list, null the head pointer, and reset the counter values
 	if (m_pHead != nullptr)
 	{
 		DeleteRec(m_pHead);
@@ -242,9 +242,11 @@ SuperArray<T>&  SuperArray<T>::operator=(const SuperArray<T>& other)
 	TNode<T>* otherArrayNode = other.GetHead();
 	TNode<T>* previous = nullptr;
 
+	// Iterate through the list of the other array and copy the details to our array
 	while (otherArrayNode != nullptr)
 	{
-		// If we are creating the first node in the list
+		// If we are creating the first node in the list (this condition will always 
+		// be true for the first iteration..its here for the rest of the iterations)
 		if (hostArrayNode == this->m_pHead)
 		{
 			hostArrayNode = new TNode<T>(otherArrayNode->GetIndex());
@@ -267,19 +269,19 @@ SuperArray<T>&  SuperArray<T>::operator=(const SuperArray<T>& other)
 
 
 template<class T>
-const int SuperArray<T>::num_elements()const
+int SuperArray<T>::num_elements()const
 {
 	return m_nNumOfElements;
 }
 
 template<class T>
-const int SuperArray<T>::lowest_index()const
+int SuperArray<T>::lowest_index()const
 {
 	return m_nLowestIndex;
 }
 
 template<class T>
-const int SuperArray<T>::highest_index()const
+int SuperArray<T>::highest_index()const
 {
 	return m_nHighestIndex;
 }
