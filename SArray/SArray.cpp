@@ -1,6 +1,7 @@
 
 #include "pch.h"
 #include <iostream>
+#include <string>
 #include <typeinfo>
 #include "IVehicle.h"
 #include "IWatercraft.h"
@@ -11,6 +12,7 @@
 
 using std::cout;
 using std::endl;
+using std::string;
 
 template<class T>
 void printList(TNode<T>* head);
@@ -74,7 +76,20 @@ int main()
 		vehicleArray[-16] = ap5;
 		vehicleArray[-1] = hab5;
 		//printList(vehicleArray.GetHead());
-		vehicleArray.PntrToFunc(PolyPrint);
+		vehicleArray.PntrToFunc(PolyPrint); 
+
+		SuperArray<int> sint;
+
+		try
+		{
+			sint.remove();
+		}
+		catch (...)
+		{
+			//cout << e;
+		}
+
+
 
 		return 0;
 	}

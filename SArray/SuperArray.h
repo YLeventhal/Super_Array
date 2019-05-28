@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <iostream>
 #include "TNode.h"
 
@@ -160,7 +161,8 @@ void SuperArray<T>::remove()
 	}
 	else// Array is empty , therfor throw an exception
 	{
-		throw "The Array is empty!";
+		std::string error = "The Array is empty!";
+		throw error;
 	}
 }
 
@@ -242,10 +244,13 @@ SuperArray<T>&  SuperArray<T>::operator=(const SuperArray<T>& other)
 	TNode<T>* otherArrayNode = other.GetHead();
 	TNode<T>* previous = nullptr;
 
+	//Erase all current nodes that exist (if there are any) in the assigned to array
+	this->remove();
+
 	// Iterate through the list of the other array and copy the details to our array
 	while (otherArrayNode != nullptr)
 	{
-		// If we are creating the first node in the list (this condition will always 
+		// Will enter here if we are creating the first node in the list (this condition will always 
 		// be true for the first iteration..its here for the rest of the iterations)
 		if (hostArrayNode == this->m_pHead)
 		{
