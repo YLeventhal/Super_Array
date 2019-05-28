@@ -78,18 +78,18 @@ int main()
 		//printList(vehicleArray.GetHead());
 		vehicleArray.PntrToFunc(PolyPrint); 
 
+
+
 		SuperArray<int> sint;
 
-		try
+		/*try
 		{
 			sint.remove();
 		}
-		catch (...)
+		catch (string e)
 		{
-			//cout << e;
-		}
-
-
+			cout << e;
+		}*/
 
 		return 0;
 	}

@@ -148,7 +148,7 @@ void SuperArray<T>::remove(int index)
 }
 
 template<class T>
-void SuperArray<T>::remove()
+void SuperArray<T>::remove()throw(std::string)
 {
 	// If Array is not empty, delete the list, null the head pointer, and reset the counter values
 	if (m_pHead != nullptr)
@@ -159,11 +159,11 @@ void SuperArray<T>::remove()
 		m_nHighestIndex = -10000000;
 		m_nLowestIndex = 10000000;
 	}
-	else// Array is empty , therfor throw an exception
+	/*else// Array is empty , therfor throw an exception
 	{
 		std::string error = "The Array is empty!";
 		throw error;
-	}
+	}*/
 }
 
 // Receives a function pointer, that itself receives an object from the array list, and calls the functioin on each object
@@ -182,6 +182,7 @@ void SuperArray<T>::PntrToFunc(void(*ptrfunc)(T))
 	else { cout << "empty list"; }
 }
 
+//Can alternatively return T& and then won't need toverload the operator= of CNode
 template<class T>
 TNode<T>& SuperArray<T>::operator[](const int index)
 {
