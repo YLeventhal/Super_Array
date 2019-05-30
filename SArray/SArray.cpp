@@ -96,20 +96,21 @@ int main()
 
 	void PolyPrint(IVehicle* ptr)
 	{
+		ptr->Print();
+
 		cout << "typeid called: " << typeid(*ptr).name() << endl;
 		if (CAirplane* ap = dynamic_cast<CAirplane*>(ptr))
 		{
 			cout << "its an airplane!" << endl;
+			return;
 		}
 
 		if (CHotAirBalloon* ap = dynamic_cast<CHotAirBalloon*>(ptr))
 		{
 			cout << "its a hot air balloon!" << endl;
+			return;
 		}
 
-
-
-		ptr->Print();
 	}
 
 

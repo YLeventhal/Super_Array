@@ -14,13 +14,11 @@ private:
 	int m_nHighestIndex = -10000000;
 
 public:
-	SuperArray() {
-		//std::cout << "called superarrays def constructor op\n";
-	};
-	~SuperArray() {};
+	~SuperArray() { remove(); };
 
 	TNode<T>* GetHead()const { return m_pHead; }
 	TNode<T>& operator[](const int index);
+	// Return value should be *this and should not be const so that we can chain expressions ex. arr1 = arr2 + arr3;
 	SuperArray<T>& operator=(const SuperArray<T>&);
 
 	//to use const here for the returned value is meaningless b/c.. what is returned is just a copy of the value. 
@@ -32,7 +30,10 @@ public:
 
 	void remove(int index);
 	void remove();
+	// Recursive utility method for recursing to end of the list and deleting each node while backtracking
 	void DeleteRec(TNode<T>* node);
+
+	// 
 	void AdjIndexRecord(int index);
 	bool Empty();
 	void PntrToFunc(void(*ptrfunc)(T));
@@ -148,7 +149,7 @@ void SuperArray<T>::remove(int index)
 }
 
 template<class T>
-void SuperArray<T>::remove()throw(std::string)
+void SuperArray<T>::remove()
 {
 	// If Array is not empty, delete the list, null the head pointer, and reset the counter values
 	if (m_pHead != nullptr)
@@ -159,11 +160,6 @@ void SuperArray<T>::remove()throw(std::string)
 		m_nHighestIndex = -10000000;
 		m_nLowestIndex = 10000000;
 	}
-	/*else// Array is empty , therfor throw an exception
-	{
-		std::string error = "The Array is empty!";
-		throw error;
-	}*/
 }
 
 // Receives a function pointer, that itself receives an object from the array list, and calls the functioin on each object
@@ -273,21 +269,34 @@ SuperArray<T>&  SuperArray<T>::operator=(const SuperArray<T>& other)
 	return *this;
 }
 
-
+// It is better to run over the entire list and count the nodes then update a member because it is exact and prevents bugs
+// as well that way i dont need to manage the count in the destrucctor as well
 template<class T>
-int SuperArray<T>::num_elements()const
+inline int SuperArray<T>::num_elements()const
 {
-	return m_nNumOfElements;
+	int count =0;
+	TNode<T>* temp = m_pHead;
+
+	// No nodes in the list 
+	if (temp == nullptr)
+		return 0;
+
+	while (temp != nullptr)
+	{
+		count++;
+		temp = temp->GetNext();
+	}
+	return count;
 }
 
 template<class T>
-int SuperArray<T>::lowest_index()const
+inline int SuperArray<T>::lowest_index()const
 {
 	return m_nLowestIndex;
 }
 
 template<class T>
-int SuperArray<T>::highest_index()const
+inline int SuperArray<T>::highest_index()const
 {
 	return m_nHighestIndex;
 }
